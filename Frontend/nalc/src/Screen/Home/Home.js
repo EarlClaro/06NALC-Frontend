@@ -342,7 +342,7 @@ function Home() {
                   onChange={(e) => setTempName(e.target.value)}
                 />
               ) : (
-                <span>{chat.thread_name}</span>
+                <span>{chat.thread_name.substring(0, 10)}{chat.thread_name.length > 10 ? '...' : ''}</span>
               )}
             </button>
 
@@ -368,7 +368,7 @@ function Home() {
       {/* Convo Page */}
       <div className="chat-input">
         <div className='convo'>
-          <div className = "convo-message" style={{ overflowY: 'auto', height: '75%', width: '1100px', alignItems: 'center' }}>
+          <div className = "convo-message" style={{ overflowY: 'auto', height: '700px', width: '1100px', alignItems: 'center' }}>
             <div className='title'>
               <h2>{selectedThread}</h2>
             </div>
