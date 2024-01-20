@@ -128,7 +128,7 @@ function Login() {
         </div>
         <div className="form">
           <div className='row'>
-              <h1 className='text-maroon'>Login Account</h1>
+              <h1 style={"color: #841818; text-decoration: underline;"}>Login Account</h1>
           </div>
           <br/>
           <div className='row'>
