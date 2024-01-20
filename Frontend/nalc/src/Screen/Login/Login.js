@@ -39,6 +39,10 @@ function Login() {
     }
   };
 
+  const handleRegister = () => {
+    window.location.href = '/register';
+  }
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -128,7 +132,7 @@ function Login() {
         </div>
         <div className="form">
           <div className='row'>
-            <h1 style={{ textDecoration: 'underline', color: '#841818' }}>Login Account</h1>
+            <h1 style={{color: '#841818' }}>Login Account</h1>
           </div>
           <br/>
           <div className='row'>
@@ -162,7 +166,7 @@ function Login() {
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
                   <button type="button" className="createAcc text-maroon" data-bs-toggle="modal" data-bs-target="#exampleModal"><strong>Forget Password</strong></button>
-                  <a className="createAcc text-maroon" href="/register" role="button"><strong> Not yet a member? </strong></a>
+                  <button className="createAcc text-maroon" onClick={handleRegister} type="button"><strong> Not yet a member? </strong></button>
                   <br/>
                   <button class="btn-login" type="button" onClick={handleLogin}>Login</button>
                 </div>

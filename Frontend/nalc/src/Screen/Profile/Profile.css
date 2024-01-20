@@ -49,8 +49,11 @@
 }
 
 .text-maroon{
+    border: none;
+    background-color: white;
     color: #841818;
 }
+
 
 .btn-registered{
     color: #541212;
