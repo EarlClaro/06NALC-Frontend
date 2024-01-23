@@ -58,10 +58,7 @@ function Register() {
   }
   return (
     <div className='containter-fluid'>
-      <div className='big-space'></div>
-      <div className='row logo-r'>
-        <img src={nalcLogo} alt="NALC Logo" />
-      </div>
+      <img src={nalcLogo} className="rounded mx-auto d-block logo-r" alt="NALC Logo"></img>
       <div class="card text-center" style={{ width: "50%" , margin: "auto" }}>
         <div class="card-header">
           <h2 className='text-maroon'><strong>Create Account</strong></h2>

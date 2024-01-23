@@ -135,13 +135,6 @@ function Login() {
             <h1 style={{color: '#841818' }}>Login Account</h1>
           </div>
           <br/>
-          <div className='row'>
-              <p>
-                  It is a long established fact that a reader will be distracted by 
-                  the readable content of a page when looking at its layout. 
-              </p>
-          </div>
-          <br/>
           <div className='row inputs'>
             <form>
                 <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
