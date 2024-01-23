@@ -46,7 +46,7 @@
 
 .text-maroon{
     border: none;
-    background-color: white;
+    mix-blend-mode: color-burn;
     color: #841818;
 }
 
@@ -62,4 +62,9 @@
 
 .big-space{
     margin-bottom: 300px;
+}
+
+.card-bg{
+    background: rgb(255,244,197);
+    background: linear-gradient(90deg, rgba(255,244,197,1) 21%, rgba(132,24,24,1) 84%);
 }

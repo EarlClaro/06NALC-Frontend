@@ -59,7 +59,7 @@ function Register() {
   return (
     <div className='containter-fluid'>
       <img src={nalcLogo} className="rounded mx-auto d-block logo-r" alt="NALC Logo"></img>
-      <div class="card text-center" style={{ width: "50%" , margin: "auto" }}>
+      <div class="card text-center card-bg" style={{ width: "50%" , margin: "auto" }}>
         <div class="card-header">
           <h2 className='text-maroon'><strong>Create Account</strong></h2>
         </div>
@@ -67,17 +67,14 @@ function Register() {
           <div className='row inputs'>
             <form>
                 <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                    {/* <div style={{width: 370, height: 48, left: 0, top: 0, position: 'absolute', background: '#F6F6F6'}} /> */}
                     <input type="email" class="form-control" id="floatingInput" placeholder="Email" required onChange={handleInputChange('email')}/>
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
                 <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                    {/* <div style={{width: 370, height: 48, left: 0, top: 0, position: 'absolute', background: '#F6F6F6'}} /> */}
                     <input type="text" class="form-control" id="floatingInput" placeholder="Name" required onChange={handleInputChange('name')}/>
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
                 <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                    {/* <div style={{width: 370, height: 48, left: 0, top: 0, position: 'absolute', background: '#F6F6F6'}} /> */}
                     <input type="password" class="form-control" id="floatingInput" placeholder="Enter Password" required onChange={handleInputChange('pwd')}/>
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
