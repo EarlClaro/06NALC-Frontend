@@ -41,7 +41,7 @@
 
 .haveAcc{
     border: none;
-    background-color: white;
+    background-color: rgb(210, 210, 210);
     color: #841818;
     text-align: center;
     font-size: large;
@@ -69,4 +69,8 @@
 .head-color{
     background-color: #841818;
     padding: 10px;
+}
+
+.body-bg{
+    background-color: rgb(210, 210, 210);
 }

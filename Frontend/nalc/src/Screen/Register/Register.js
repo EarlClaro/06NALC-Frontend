@@ -63,7 +63,7 @@ function Register() {
         <div class=" head-color">
           <h2 className='textReg'><strong>Create Account</strong></h2>
         </div>
-        <div class="card-body">
+        <div class="card-body body-bg">
           <br/>
           <div className='row inputs'>
             <form>
