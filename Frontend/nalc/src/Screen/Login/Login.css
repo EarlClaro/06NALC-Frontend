@@ -40,7 +40,7 @@
 }
 
 .createAcc{
-    text-align: end;
+    text-align: start;
     font-size: large;
 }
 
@@ -54,6 +54,7 @@
     background-color: #841818;
     color: white;
     padding: 15px 25px;
-    border-radius: 50px;
+    border-radius: 30px;
+    width: 50%;
     font-size: 25px;
 }
