@@ -40,14 +40,16 @@
 }
 
 .haveAcc{
+    border: none;
+    background-color: white;
+    color: #841818;
     text-align: center;
     font-size: large;
 }
 
-.text-maroon{
+.textReg{
     border: none;
-    mix-blend-mode: color-burn;
-    color: #841818;
+    color: white;
 }
 
 
@@ -64,7 +66,7 @@
     margin-bottom: 300px;
 }
 
-.card-bg{
-    background: rgb(255,244,197);
-    background: linear-gradient(90deg, rgba(255,244,197,1) 21%, rgba(132,24,24,1) 84%);
+.head-color{
+    background-color: #841818;
+    padding: 10px;
 }

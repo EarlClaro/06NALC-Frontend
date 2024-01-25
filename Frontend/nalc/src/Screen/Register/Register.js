@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import nalcLogo from '../../nalcLogo.png';
-import './Register.css'
+import './Register.css';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -59,11 +59,12 @@ function Register() {
   return (
     <div className='containter-fluid'>
       <img src={nalcLogo} className="rounded mx-auto d-block logo-r" alt="NALC Logo"></img>
-      <div class="card text-center card-bg" style={{ width: "50%" , margin: "auto" }}>
-        <div class="card-header">
-          <h2 className='text-maroon'><strong>Create Account</strong></h2>
+      <div class="card text-center" style={{ width: "50%" , margin: "auto" }}>
+        <div class=" head-color">
+          <h2 className='textReg'><strong>Create Account</strong></h2>
         </div>
         <div class="card-body">
+          <br/>
           <div className='row inputs'>
             <form>
                 <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
@@ -79,7 +80,7 @@ function Register() {
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                  <button className="haveAcc text-maroon" onClick={handleLogin} type="button"><strong>Already a member? </strong></button>
+                  <button className="haveAcc" onClick={handleLogin} type="button"><strong>Already a member? </strong></button>
                   <button class="btn-register" type="button" onClick={handleRegister}>Register</button>
                 </div>
             </form>
