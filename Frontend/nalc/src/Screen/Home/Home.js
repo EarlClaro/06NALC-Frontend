@@ -342,7 +342,7 @@ function Home() {
                   onChange={(e) => setTempName(e.target.value)}
                 />
               ) : (
-                <span>{chat.thread_name.substring(0, 10)}{chat.thread_name.length > 10 ? '...' : ''}</span>
+                <span className='span-text'>{chat.thread_name.substring(0, 10)}{chat.thread_name.length > 14 ? '...' : ''}</span>
               )}
             </button>
 
