@@ -129,7 +129,6 @@ const UserProfile = () => {
 
   return (
     <div>
-      <div className='big-space'></div>
       <div className='row logo-r'>
         <img src={nalcLogo} alt="NALC Logo" />
       </div>
