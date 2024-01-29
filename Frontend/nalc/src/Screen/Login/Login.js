@@ -158,8 +158,8 @@ function Login() {
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
                 <div class="d-grid gap-2">
-                  <button type="button" className="createAcc text-maroon" data-bs-toggle="modal" data-bs-target="#exampleModal"><strong>Forget Password</strong></button>
-                  <button className="createAcc text-maroon" onClick={handleRegister} type="button"><strong> Not yet a member? </strong></button>
+                  <button type="button" className="createAcc text-maroon" data-bs-toggle="modal" data-bs-target="#exampleModal"><strong>Forgot Password</strong></button>
+                  <button className="createAcc text-maroon" onClick={handleRegister} type="button"><strong> Register Now! </strong></button>
                   <br/>
                 </div>
                 <button class="btn-login" type="button" onClick={handleLogin}>Login</button>

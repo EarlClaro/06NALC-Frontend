@@ -110,7 +110,7 @@ function Home() {
       const messages = responseMsg.data.map(message => {
         const messageText = JSON.parse(message.message_text);
         const user = messageText.query;
-        let text = messageText.response;
+        let text = messageText.response.replace(/\n/g, '<br>');
   
         return {
           user,
@@ -125,6 +125,7 @@ function Home() {
       console.error(error);
     }
   };
+  
 
   const fetchData = async (id) => {
     try {
@@ -168,7 +169,6 @@ function Home() {
     try {
       setShowHome(false);
       fetchData(id);
-      console.log("HandleChat" + id)
     } catch (error) {
       console.error(error);
     }
@@ -271,7 +271,6 @@ function Home() {
             thread_id: currentThreadId,
             query: input,
           });
-  
           // Fetch data and messages after sending the message
           await fetchDataAndMsg(currentThreadId);
           setInput('');
@@ -378,15 +377,18 @@ function Home() {
             ) : (
               chatMsg.map((message, index) => (
                 <div key={index} style={{ marginBottom: '10px', padding: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', fontSize: '20px' }}>
-                  <FontAwesomeIcon icon={faUser} style={{ color: "#000000", marginRight: '5px', textShadow: '1px 1px 1px rgba(0, 0, 0, 0.1)' }} /> : {message.user}<br />
-                  <br />
-                  <FontAwesomeIcon icon={faRobot} style={{ color: "rgb(132, 24, 24)", marginRight: '5px', textShadow: '1px 1px 1px rgba(132, 24, 24, 0.5)' }} /> :
-                  {Array.isArray(message.text) ? (
+                  <div style={{ whiteSpace: 'pre-line' }}>
+                    <FontAwesomeIcon icon={faUser} style={{ color: "#000000", marginRight: '5px', textShadow: '1px 1px 1px rgba(0, 0, 0, 0.1)' }} />{' '}
+                    You {'\n'}
+                    {message.user}
+                  </div>
+                  <br/>
+                  <FontAwesomeIcon icon={faRobot} style={{ color: "rgb(132, 24, 24)", marginRight: '5px', textShadow: '1px 1px 1px rgba(132, 24, 24, 0.5)' }} /> NALC                  {Array.isArray(message.text) ? (
                     message.text.map((paper, i) => (
-                      <div key={i}>{paper}</div>
+                      <div key={i} dangerouslySetInnerHTML={{ __html: paper }} />
                     ))
                   ) : (
-                    " " + message.text
+                    <div dangerouslySetInnerHTML={{ __html: message.text }} />
                   )}
                 </div>
               ))
