@@ -80,7 +80,7 @@ function Register() {
                     <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                  <button className="haveAcc" onClick={handleLogin} type="button"><strong> Login </strong></button>
+                  <button className="haveAcc" onClick={handleLogin} type="button"><strong> Already a member? </strong></button>
                   <button class="btn-register" type="button" onClick={handleRegister}>Register</button>
                 </div>
             </form>
