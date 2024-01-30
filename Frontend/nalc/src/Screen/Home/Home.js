@@ -316,8 +316,7 @@ function Home() {
       {/* Side Bar */}
       <div className="chat-sidebar">
         <button type="button" class="btn btn-outline-light newChatBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            <FontAwesomeIcon icon={faPlus} style={{ color: "#ffffff" }} />
-            <span style={{ marginLeft: "5px" }}>New Chat</span>
+            <span style={{ marginLeft: "5px" }}>+ New Chat</span>
         </button>
         <div className='logoutBtn d-grid gap-2 col-2 mx-auto'>
           <UserOption userData={userData} Logout={handleLogout} DeleteAll={handleDeleteAll} navigate={navigate} />
@@ -367,7 +366,7 @@ function Home() {
       {/* Convo Page */}
       <div className="chat-input">
         <div className='convo'>
-          <div className = "convo-message" style={{ overflowY: 'auto', height: '700px', width: '1100px', alignItems: 'center' }}>
+          <div className = "convo-message convo-message-container">
             <div className='title'>
               <h2>{selectedThread}</h2>
             </div>
@@ -393,28 +392,28 @@ function Home() {
                 </div>
               ))
             )}
-          </div>
-        </div>
-        <div className='inputForm'>
-            {loading && 
-              <div>
-                <div class="spinner-border text-secondary" role="status">
-                </div>
-                <span>Analyzing...</span>
-              </div>    
-            }
-            <div className="input-group mb-1">
-                <input type="text" className="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" value={input} onChange={handleInputChange("input")}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleSendMessage();
-                    }
-                }}/>
-                <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSendMessage}>
-                    <FontAwesomeIcon icon={faPaperPlane} style={{color: "#841818",}} />
-                </button>
+            <div className='inputForm'>
+              {loading && 
+                <div>
+                  <div class="spinner-border text-secondary" role="status">
+                  </div>
+                  <span>Analyzing...</span>
+                </div>    
+              }
+              <div className="input-group mb-1">
+                  <input type="text" className="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" value={input} onChange={handleInputChange("input")}
+                  onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleSendMessage();
+                      }
+                  }}/>
+                  <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSendMessage}>
+                      <FontAwesomeIcon icon={faPaperPlane} style={{color: "#841818",}} />
+                  </button>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
