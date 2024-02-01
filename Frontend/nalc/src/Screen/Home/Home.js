@@ -3,12 +3,17 @@ import React , {useState , useEffect} from 'react';
 import axios from 'axios';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane , faPlus, faRobot , faUser, faPen, faCheck, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane , faRobot , faUser, faPen, faCheck, faTrash} from '@fortawesome/free-solid-svg-icons'
 import UserOption from '../../Components/UserOption';
 import HomePage from '../../Components/HomePage';
 import { useNavigate } from 'react-router-dom';
+import { ripples , dotWave , quantum } from 'ldrs';
 
 function Home() {
+    ripples.register();
+    dotWave.register();
+    quantum.register()
+
     const [input, setInput] = useState('');
     const [chatName , setChatName] = useState('');    
     const [chats , setChats] = useState([]);
@@ -18,11 +23,13 @@ function Home() {
     const [editModes, setEditModes] = useState(Array(reversedChats.length).fill(false));
     const [tempName, setTempName] = useState('');
     const [selectedThread, setSelectedThread] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [msgloading, setmsgloading] = useState(false);
     const [chatCreated, setChatCreated] = useState(false);
     const [userData , setUserData] = useState([]);
     const [showHome , setShowHome] = useState(true);
     const navigate = useNavigate();
+    const [threadLoading , setThreadLoading] = useState(false);
+    const [convoLoading , setConvoLoading] = useState(false);
 
   // Set the initial token and headers
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}`;
@@ -94,6 +101,8 @@ function Home() {
       }
     } catch (error) {
       console.error('Error:', error);
+    }finally{
+      setThreadLoading(false); 
     }
   };
 
@@ -123,12 +132,17 @@ function Home() {
       setThreadId(id);
     } catch (error) {
       console.error(error);
+    } finally{
+      setConvoLoading(false);
     }
   };
   
 
   const fetchData = async (id) => {
     try {
+      if(reversedChats.length == 0){
+        setThreadLoading(true);
+      }
       const response = await axios.get(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`);
       fetchDataAndMsg(id);
     } catch (error) {
@@ -166,6 +180,7 @@ function Home() {
   
 
   const handleChat = async (id) => {
+    setConvoLoading(true);
     try {
       setShowHome(false);
       fetchData(id);
@@ -252,7 +267,7 @@ function Home() {
     if (input.trim() === '') {
       // Display error or handle accordingly
     } else {
-      setLoading(true);
+      setmsgloading(true);
   
       try {
         let currentThreadId;
@@ -280,7 +295,7 @@ function Home() {
         alert("Something Went Wrong, Try Again!");
         console.log(error);
       } finally {
-        setLoading(false);
+        setmsgloading(false);
       }
     }
   };
@@ -324,43 +339,50 @@ function Home() {
         <br/>
         <br/>
         <div style={{ overflowY: 'auto', height: '75%' }}>
-        {reversedChats.map((chat, index) => (
-          <div key={chat.thread_id} style={{ position: 'relative' }}>
-            <button
-              className="btn btn-warning btn-lg"
-              role="button"
-              aria-disabled="true"
-              style={{ width: '100%', display: 'block', marginBottom: '10px' }}
-              onClick={() => handleChat(chat.thread_id)}
-            >
-              {editModes[index] ? (
-                <input
-                  type="text"
-                  value={tempName}
-                  onChange={(e) => setTempName(e.target.value)}
-                />
-              ) : (
-                <span className='span-text'>{chat.thread_name.substring(0, 10)}{chat.thread_name.length > 14 ? '...' : ''}</span>
-              )}
-            </button>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', top: 0, right: 0  }}>
+          {reversedChats.map((chat, index) => (
+            <div key={chat.thread_id} style={{ position: 'relative' }}>
               <button
-                className="btn btn-transparent btn-lg"
-                style={{ marginRight: '0px' }}
-                onClick={() => (editModes[index] ? handleEditChat(chat.thread_id, index) : toggleEditMode(index, chat.thread_name))}
+                className="btn btn-warning btn-lg"
+                role="button"
+                aria-disabled="true"
+                style={{ width: '100%', display: 'block', marginBottom: '10px' }}
+                onClick={() => handleChat(chat.thread_id)}
               >
-                {editModes[index] ? <FontAwesomeIcon icon={faCheck} style={{color: "#541212",}} /> : <FontAwesomeIcon icon={faPen} style={{color: "#541212",}} />}
+                {editModes[index] ? (
+                  <input
+                    type="text"
+                    value={tempName}
+                    onChange={(e) => setTempName(e.target.value)}
+                  />
+                ) : (
+                  <span className='span-text'>{chat.thread_name.substring(0, 10)}{chat.thread_name.length > 14 ? '...' : ''}</span>
+                )}
               </button>
-              <button
-                className="btn btn-transparent btn-lg"
-                onClick={() => handleDeleteChat(chat.thread_id)}
-              >
-                <FontAwesomeIcon icon={faTrash} style={{color: "#541212",}} />
-              </button>
+              {/* Edit */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', top: 0, right: 0  }}>
+                <button
+                  className="btn btn-transparent btn-lg"
+                  style={{ marginRight: '0px' }}
+                  onClick={() => (editModes[index] ? handleEditChat(chat.thread_id, index) : toggleEditMode(index, chat.thread_name))}
+                >
+                  {editModes[index] ? <FontAwesomeIcon icon={faCheck} style={{color: "#541212",}} /> : <FontAwesomeIcon icon={faPen} style={{color: "#541212",}} />}
+                </button>
+                <button
+                  className="btn btn-transparent btn-lg"
+                  onClick={() => handleDeleteChat(chat.thread_id)}
+                >
+                  <FontAwesomeIcon icon={faTrash} style={{color: "#541212",}} />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+          {
+            threadLoading && 
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <l-ripples size="150" speed="2" color="yellow"></l-ripples>
+            </div>
+          }
+          
         </div>
       </div>
       {/* Convo Page */}
@@ -369,20 +391,29 @@ function Home() {
           <div className = "convo-message convo-message-container">
             <div className='title'>
               <h2>{selectedThread}</h2>
+              {convoLoading && 
+                <l-dot-wave
+                  size="47"
+                  speed="1" 
+                  color="yellow" 
+                ></l-dot-wave>
+              }  
             </div>
             <br/>
             {showHome ? (
-              <HomePage/>
+              <HomePage />
             ) : (
               chatMsg.map((message, index) => (
                 <div key={index} style={{ marginBottom: '10px', padding: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', fontSize: '20px' }}>
                   <div style={{ whiteSpace: 'pre-line' }}>
                     <FontAwesomeIcon icon={faUser} style={{ color: "#000000", marginRight: '5px', textShadow: '1px 1px 1px rgba(0, 0, 0, 0.1)' }} />{' '}
-                    You {'\n'}
+                    <strong>You</strong> {'\n'}
                     {message.user}
                   </div>
-                  <br/>
-                  <FontAwesomeIcon icon={faRobot} style={{ color: "rgb(132, 24, 24)", marginRight: '5px', textShadow: '1px 1px 1px rgba(132, 24, 24, 0.5)' }} /> NALC                  {Array.isArray(message.text) ? (
+                  <br />
+                  <FontAwesomeIcon icon={faRobot} style={{ color: "rgb(132, 24, 24)", marginRight: '5px', textShadow: '1px 1px 1px rgba(132, 24, 24, 0.5)' }} />
+                  <strong>NALC</strong>
+                  {Array.isArray(message.text) ? (
                     message.text.map((paper, i) => (
                       <div key={i} dangerouslySetInnerHTML={{ __html: paper }} />
                     ))
@@ -393,11 +424,14 @@ function Home() {
               ))
             )}
             <div className='inputForm'>
-              {loading && 
+              {msgloading && 
                 <div>
-                  <div class="spinner-border text-secondary" role="status">
-                  </div>
-                  <span>Analyzing...</span>
+                  <l-quantum
+                    size="20"
+                    speed="1.75" 
+                    color="black" 
+                  ></l-quantum>
+                  <span>Analyzing</span>
                 </div>    
               }
               <div className="input-group mb-1">
