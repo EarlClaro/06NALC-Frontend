@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import { lineWobble } from 'ldrs';
 import nalcLogo from '../../nalcLogo.png';
 import './Register.css';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
+  lineWobble.register();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const navigate = useNavigate();
+  const [regLoading , setRegLoading] = useState(false);
 
   const handleRegister = async () => {
     try {
+      setRegLoading(true);
       const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/register/', {
         email: email,
         password: password,
@@ -39,6 +45,8 @@ function Register() {
         // Other errors
         alert('An error occurred during registration. Please try again.');
       }
+    } finally{
+      setRegLoading(false);
     }
   };
 
@@ -82,6 +90,17 @@ function Register() {
                 <div class="d-grid gap-2 col-6 mx-auto">
                   <button className="haveAcc" onClick={handleLogin} type="button"><strong> Already a member? </strong></button>
                   <button class="btn-register" type="button" onClick={handleRegister}>Register</button>
+                  {regLoading && 
+                  <div className='row'>
+                    <l-line-wobble
+                      size="80"
+                      stroke="5"
+                      bg-opacity="0"
+                      speed="2"
+                      color="#841818" 
+                    ></l-line-wobble>
+                  </div>
+                  }
                 </div>
             </form>
           </div>

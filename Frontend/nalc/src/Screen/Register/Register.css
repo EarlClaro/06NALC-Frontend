@@ -60,6 +60,12 @@
     border-radius: 25px;
     font-size: 25px;
     margin: auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-register:hover{
+    background-color: #ad2d2d;
+
 }
 
 .big-space{

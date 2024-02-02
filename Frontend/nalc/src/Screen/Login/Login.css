@@ -50,11 +50,17 @@
     color: #841818;
 }
 
-.btn-login{
+.btn-login {
     background-color: #841818;
     color: white;
     padding: 15px 25px;
     border-radius: 30px;
     width: 50%;
     font-size: 25px;
+    transition: background-color 0.3s ease;
 }
+
+.btn-login:hover {
+    background-color: #ad2d2d;
+}
+

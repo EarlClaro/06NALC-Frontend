@@ -30,6 +30,7 @@ function Home() {
     const navigate = useNavigate();
     const [threadLoading , setThreadLoading] = useState(false);
     const [convoLoading , setConvoLoading] = useState(false);
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
 
   // Set the initial token and headers
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}`;
@@ -152,6 +153,7 @@ function Home() {
 
   const handleCreateChat = async (name) => {
     try {
+      setThreadLoading(true);
       const nameToUse = chatName !== '' ? chatName : name;
       setChatName(nameToUse);
       const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/', {
@@ -177,30 +179,30 @@ function Home() {
       throw error; // Rethrow the error to be caught by the caller
     }
   };
-  
 
   const handleChat = async (id) => {
-    setConvoLoading(true);
     try {
-      setShowHome(false);
+      setShowHome(true);
+      setConvoLoading(true);
       fetchData(id);
     } catch (error) {
       console.error(error);
+    } finally{
+      setShowHome(false);
     }
   };
 
   const handleEditChat = async (id, index) => {
     try {
-      // Use a callback function to get the latest value of tempName
       await axios.put(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`, {
         thread_name: tempName,
       });
   
-      console.log(`Chat with id ${id} edited to ${tempName}`);
       setTempName('');
       const newEditModes = [...editModes];
       newEditModes[index] = false;
       setEditModes(newEditModes);
+      fetchDataAndMsg(id);
       fetchChats();
     } catch (error) {
       console.error(error);
@@ -342,11 +344,14 @@ function Home() {
           {reversedChats.map((chat, index) => (
             <div key={chat.thread_id} style={{ position: 'relative' }}>
               <button
-                className="btn btn-warning btn-lg"
+                className={`btn ${selectedButtonIndex === index ? 'btn-warning' : 'btn-outline-warning'} btn-lg`}
                 role="button"
                 aria-disabled="true"
                 style={{ width: '100%', display: 'block', marginBottom: '10px' }}
-                onClick={() => handleChat(chat.thread_id)}
+                onClick={() => {
+                  setSelectedButtonIndex(index);
+                  handleChat(chat.thread_id);
+                }}
               >
                 {editModes[index] ? (
                   <input
@@ -362,10 +367,10 @@ function Home() {
               <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', top: 0, right: 0  }}>
                 <button
                   className="btn btn-transparent btn-lg"
-                  style={{ marginRight: '0px' }}
+                  style={{ marginRight: '8px' }} // Add spacing between buttons
                   onClick={() => (editModes[index] ? handleEditChat(chat.thread_id, index) : toggleEditMode(index, chat.thread_name))}
                 >
-                  {editModes[index] ? <FontAwesomeIcon icon={faCheck} style={{color: "#541212",}} /> : <FontAwesomeIcon icon={faPen} style={{color: "#541212",}} />}
+                  {editModes[index] ? <FontAwesomeIcon icon={faCheck} style={{color: "#541212"}} /> : <FontAwesomeIcon icon={faPen} style={{color: "#541212"}} />}
                 </button>
                 <button
                   className="btn btn-transparent btn-lg"

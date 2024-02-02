@@ -4,7 +4,6 @@ import {useNavigate} from 'react-router-dom';
 import { lineWobble } from 'ldrs';
 import nalcLogo from '../../nalcLogo.png';
 import './Login.css';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   lineWobble.register();
@@ -171,15 +170,15 @@ function Login() {
                 <button class="btn-login" type="button" onClick={handleLogin}>Login</button>
             </form>
           </div>
+          <br/>
             {loginLoading && 
             <div className='row'>
-              <span>Validating</span>
               <l-line-wobble
                 size="80"
                 stroke="5"
-                bg-opacity="0.1"
-                speed="1.75"
-                color="black" 
+                bg-opacity="0"
+                speed="2"
+                color="#841818" 
               ></l-line-wobble>
             </div>
             }
