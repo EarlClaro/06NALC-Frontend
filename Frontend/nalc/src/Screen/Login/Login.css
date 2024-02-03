@@ -64,3 +64,9 @@
     background-color: #ad2d2d;
 }
 
+.l-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: right;
+  }
