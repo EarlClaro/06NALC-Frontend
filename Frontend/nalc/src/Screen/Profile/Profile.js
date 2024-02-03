@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import nalcLogo from '../../nalcLogo.png';
 import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faCheck, faXmark, faPenToSquare, faRightToBracket} from '@fortawesome/free-solid-svg-icons'
+import {faCheck, faTimes, faPen, faRightToBracket, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -128,70 +128,113 @@ const UserProfile = () => {
   }
 
   return (
-    <div>
-      <div className='row logo-r'>
-        <img src={nalcLogo} alt="NALC Logo" />
-      </div>
-      <div className='title-r'>
-        <div className='row'>
-          <h1 className='text-maroon'><strong>User Profile</strong></h1>
+    <div className='container-fluid-profile d-flex flex-column align-items-center justify-content-center'>
+      <img
+        src={nalcLogo}
+        className="rounded mx-auto d-block logo-p mb-4"
+        alt="NALC Logo"
+        onClick={goBack}
+      />
+      <div className="card text-center" style={{ width: "30%" }}>
+        <div className="head-color">
+          <h2 className='textReg'><strong>User Profile</strong></h2>
         </div>
-        <div>
-          {editMode ? (
-            <div>
-              <p className='text-maroon'><h3><strong>Username: </strong></h3></p>
-              <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                <input
-                  type='text' name='name' class="form-control" id="floatingInput"
-                  value={tempProfile.name || ''} onChange={handleNameChange}
-                />
-                <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute'}} />
+        <div className="card-body body-bg">
+          <div className='row inputs'>
+            {editMode ? (
+              <form className="d-flex flex-column align-items-center">
+                {/* Username */}
+                <div className='inputFieldProf'>
+                  <div className="label-wrapper">
+                    <label className='text-maroonprof'><h3><strong>Username: </strong></h3></label>
+                  </div>
+                  <input
+                    type='text'
+                    name='name'
+                    className="form-control"
+                    id="floatingInput"
+                    value={tempProfile.name || ''}
+                    onChange={handleNameChange}
+                    placeholder="Enter your username"
+                  />
+                </div>
+
+                {/* Email */}
+                <div className='inputFieldProf'>
+                  <div className="label-wrapper">
+                    <label className='text-maroonprof'><h3><strong>Email: </strong></h3></label>
+                  </div>
+                  <input
+                    type='email'
+                    name='email'
+                    className="form-control"
+                    id="floatingInput"
+                    value={tempProfile.email || ''}
+                    onChange={handleEmailChange}
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                {/* Password */}
+                <div className='inputFieldProf'>
+                  <div className="label-wrapper">
+                    <label className='text-maroonprof'><h3><strong>Password: </strong></h3></label>
+                  </div>
+                  <input
+                    type='password'
+                    name='password'
+                    className="form-control"
+                    id="floatingInput"
+                    value={tempProfile.password || ''}
+                    onChange={handlePasswordChange}
+                    placeholder="Enter your password"
+                  />
+                </div>
+
+                {/* Save Changes and Cancel Buttons */}
+                <div className="d-flex flex-row justify-content-center gap-2 mx-auto mt-3">
+                  <button className='btn-registered' onClick={handleSaveChanges}>
+                    <FontAwesomeIcon icon={faCheck} style={{ color: "#541212" }} />
+                    &nbsp; Save
+                  </button>
+                  <button className='btn-registered' onClick={toggleEditMode}>
+                    <FontAwesomeIcon icon={faTimes} style={{ color: "#541212" }} />
+                    &nbsp; Cancel
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="d-flex flex-column align-items-center">
+                {/* Display Username */}
+                <div className='inputFieldProf'>
+                  <div className="label-wrapper">
+                    <label className='text-maroonprof'><h3><strong>Username: </strong></h3></label>
+                  </div>
+                  <p className="form-control">{userProfile.name}</p>
+                </div>
+
+                {/* Display Email */}
+                <div className='inputFieldProf'>
+                  <div className="label-wrapper">
+                    <label className='text-maroonprof'><h3><strong>Email: </strong></h3></label>
+                  </div>
+                  <p className="form-control">{userProfile.email}</p>
+                </div>
+
+                {/* Edit and Back Buttons */}
+                <div className="d-flex flex-row justify-content-center gap-2 mx-auto mt-3">
+                    <button className='btn-registered' onClick={toggleEditMode}>
+                        <FontAwesomeIcon icon={faPen} style={{ color: "#541212" }} />
+                        &nbsp; Edit
+                    </button>
+                    <button className='btn-registered' onClick={goBack}>
+                        <FontAwesomeIcon icon={faArrowLeft} style={{ color: "#541212" }} />
+                        &nbsp; Back
+                    </button>
+                </div>
               </div>
-              <p className='text-maroon'><h3><strong>Email: </strong></h3></p>
-              <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                <input type='email' name='email' class="form-control" id="floatingInput"
-                  value={tempProfile.email || ''} onChange={handleEmailChange}
-                />
-                <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute'}} />
-              </div>
-              <p className='text-maroon'><h3><strong>Password: </strong></h3></p>
-              <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-              <input type='password' name='password' class="form-control" id="floatingInput"
-                value={tempProfile.password || ''} onChange={handlePasswordChange}
-              />
-                <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute'}} />
-              </div>
-              <button className='btn-registered' onClick={handleSaveChanges}>
-                <FontAwesomeIcon icon={faCheck} style={{color: "#541212",}}/>
-                &nbsp; Save Changes
-              </button>
-              <button className='btn-registered' onClick={toggleEditMode}>
-                <FontAwesomeIcon icon={faXmark} style={{color: "#541212",}}/>
-                &nbsp; Cancel
-              </button>
-            </div>
-          ) : (
-            <div>
-              <p className='text-maroon'><h3><strong>Username: </strong></h3></p>
-              <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                <p class="form-control">{userProfile.name}</p>
-                <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
-              </div>
-              <p className='text-maroon'><h3><strong>Email: </strong></h3></p>
-              <div className='inputField' style={{width: 370, height: 48, position: 'relative'}}>
-                <p class="form-control">{userProfile.email}</p>
-                <div style={{width: 6, height: 35, left: 0, top: 0, position: 'absolute', background: '#841818'}} />
-              </div>
-              <button className='btn-registered' onClick={toggleEditMode}>
-                <FontAwesomeIcon icon={faPenToSquare} style={{color: "#541212",}}/>
-                &nbsp; Edit
-              </button>
-              <button className='btn-registered' onClick={goBack}>
-                <FontAwesomeIcon icon={faRightToBracket} style={{color: "#541212",}}/>
-                &nbsp; Back
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
