@@ -135,6 +135,7 @@ function Home() {
       console.error(error);
     } finally{
       setConvoLoading(false);
+      setShowHome(false);
     }
   };
   
@@ -182,13 +183,12 @@ function Home() {
 
   const handleChat = async (id) => {
     try {
+      setSelectedThread("");
       setShowHome(true);
       setConvoLoading(true);
       fetchData(id);
     } catch (error) {
       console.error(error);
-    } finally{
-      setShowHome(false);
     }
   };
 
@@ -262,7 +262,7 @@ function Home() {
       }
     };
     fetchData();
-  }, []); 
+  }, [chats]); 
   
 
   const handleSendMessage = async () => {
