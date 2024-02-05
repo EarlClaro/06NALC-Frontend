@@ -251,9 +251,11 @@ function Home() {
   
   useEffect(() => {  
       fetchData(threadId);
-  }, [threadId]);
+      console.log(chats);
+  }, []);
 
   useEffect(() => {
+    console.log("second useEffect" + chats);
     const fetchData = async () => {
       try {
         await fetchUserData();
@@ -263,7 +265,7 @@ function Home() {
       }
     };
     fetchData();
-  }, [chats]); 
+  }, []); 
   
 
   const handleSendMessage = async () => {
