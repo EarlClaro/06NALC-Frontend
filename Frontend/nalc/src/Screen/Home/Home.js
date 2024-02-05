@@ -183,6 +183,7 @@ function Home() {
 
   const handleChat = async (id) => {
     try {
+      setChatCreated(true);
       setSelectedThread("");
       setShowHome(true);
       setConvoLoading(true);
