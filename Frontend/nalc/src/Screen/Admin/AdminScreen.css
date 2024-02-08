@@ -1,8 +1,16 @@
 .replaceDataBtn{
-    width: 100%;
-    padding: 5px 5px;
-    border-radius: 10px;
-}
+    background-color: #841818;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 20px;
+    margin: 0px;
+    transition: background-color 0.3s ease;
+  }
+
+  .replaceDataBtn:hover {
+    background-color: #ad2d2d;
+  }
 
 .container-fluidity {
     display: flex;
@@ -10,24 +18,30 @@
     align-items: center;
     justify-content: center;
     height: 50vh;
-    padding-top: 120px;
+    padding-top: 100px;
   }
+
+.logo-a {
+  margin-top: 100px;
+  height: 300px;
+  width: 300px;
+}
 
 .inputJson {
     text-align: center;
-    color: white;
-    background-color: #841818;
+    background-color: rgb(210, 210, 210);
     padding: 20px;
     border-radius: 10px;
 }
 
 .inputJson input[type="file"] {
     margin-bottom: 20px;
+    margin-right: -50px;
 }
 
 .titleArea {
-    padding: 70px;
-    padding-top: 30px;
+    padding: 50px;
+    padding-top: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,5 +55,6 @@
   }
 
   .fileInputLabel {
-    margin-right: 10px; /* Adjust this value as needed for the desired space */
+    margin-right: 10px;
+    margin-left: 20px;
   }

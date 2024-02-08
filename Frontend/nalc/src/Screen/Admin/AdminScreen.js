@@ -79,32 +79,37 @@ const AdminScreen = () => {
   };
 
   return (
-    <div>
+    <div className='container-fluid-profile d-flex flex-column align-items-center justify-content-center'>
       <div className="top-left">
         <button className='replaceDataBtn' onClick={handleLogout}>
-          <FontAwesomeIcon icon={faRightFromBracket} style={{color: "#541212",}} />
+          <FontAwesomeIcon icon={faRightFromBracket} />
           &nbsp; Logout
         </button>
       </div>
       <div className='container-fluidity'>
-      <div className="row logo">
-        <img src={nalcLogo} alt="NALC Logo" />
+      <div className="row d-block">
+        <img
+          src={nalcLogo}
+          className="rounded mx-auto d-block logo-a mb-4"
+          alt="NALC Logo"
+          onClick={handleLogout}
+        />
       </div>
       <div className='titleArea'>
         <h1 className='text-maroon'><strong>Admin Dashboard</strong></h1>
       </div>
       <form className='inputJson' onSubmit={handleSubmit}>
-      <label htmlFor="fileInput" className="fileInputLabel">
-        JSON File:
-      </label>
-      <input type="file"onChange={handleFileChange}/>
-        <br />
-        <button className='replaceDataBtn' type="submit">
-          <FontAwesomeIcon icon={faUpload} />
-          &nbsp; Submit
-        </button>
+        <label htmlFor="fileInput" className="fileInputLabel">
+          JSON File:
+        </label>
+        <input type="file"onChange={handleFileChange}/>
+          <br />
+          <button className='replaceDataBtn' type="submit">
+            <FontAwesomeIcon icon={faUpload} />
+            &nbsp; Submit
+          </button>
       </form>
-    </div>
+      </div>
     </div>
   );
 };
