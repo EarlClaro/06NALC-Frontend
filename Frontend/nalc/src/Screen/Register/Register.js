@@ -18,7 +18,7 @@ function Register() {
   const handleRegister = async () => {
     try {
       setRegLoading(true);
-      const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/register/', {
+      const response = await axios.post('http://localhost:8000/api/users/register/', {
         email: email,
         password: password,
         name: name,

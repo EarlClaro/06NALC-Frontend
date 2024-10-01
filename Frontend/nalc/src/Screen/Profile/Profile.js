@@ -64,7 +64,7 @@ const UserProfile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/details/', {
+      const response = await axios.get('http://localhost:8000/api/users/details/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
@@ -85,7 +85,7 @@ const UserProfile = () => {
     try {
       // Perform API call to update user information
       const response = await axios.patch(
-        'https://nalc-backend-ebe218d27802.herokuapp.com/api/users/update/',
+        'http://localhost:8000/api/users/update/',
         tempProfile, // Send updated user profile data
         {
           headers: {

@@ -16,7 +16,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       setLoginLoading(true);
-      const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/login/', {
+      const response = await axios.post('http://localhost:8000/api/users/login/', {
         email: email,
         password: pwd,
       });
@@ -62,7 +62,7 @@ function Login() {
 
   const handleForgetPwd = async () => {
     try {
-      const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/reset-password/', {
+      const response = await axios.post('http://localhost:8000/api/reset-password/', {
         email: forgetPwdEmail,
       });
     

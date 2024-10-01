@@ -85,7 +85,7 @@ function Home() {
 
   const fetchUserData = async () => {
       try{
-        const response = await axios.get('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/details/');
+        const response = await axios.get('http://localhost:8000/api/users/details/');
         setUserData(response.data);
       } catch(error){
         console.error(error);
@@ -94,7 +94,7 @@ function Home() {
 
   const fetchChatsAndData = async (id) => {
     try {
-      const responseChats = await axios.get('https://nalc-backend-ebe218d27802.herokuapp.com/api/users/threads/');
+      const responseChats = await axios.get('http://localhost:8000/api/users/threads/');
       setChats(responseChats.data);
   
       if (id !== undefined) {
@@ -114,8 +114,8 @@ function Home() {
 
   const fetchDataAndMsg = async (id) => {
     try {
-      const responseThread = await axios.get(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`);
-      const responseMsg = await axios.get(`https://nalc-backend-ebe218d27802.herokuapp.com/api/messages/thread/${id}/`);
+      const responseThread = await axios.get(`http://localhost:8000/api/threads/${id}/`);
+      const responseMsg = await axios.get(`http://localhost:8000/api/messages/thread/${id}/`);
   
       const messages = responseMsg.data.map(message => {
         const messageText = JSON.parse(message.message_text);
@@ -145,7 +145,7 @@ function Home() {
       if(reversedChats.length == 0){
         setThreadLoading(true);
       }
-      const response = await axios.get(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`);
+      const response = await axios.get(`http://localhost:8000/api/threads/${id}/`);
       fetchDataAndMsg(id);
     } catch (error) {
       console.error(error);
@@ -157,7 +157,7 @@ function Home() {
       setThreadLoading(true);
       const nameToUse = chatName !== '' ? chatName : name;
       setChatName(nameToUse);
-      const response = await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/', {
+      const response = await axios.post('http://localhost:8000/api/threads/', {
         thread_name: nameToUse,
       });
   
@@ -195,7 +195,7 @@ function Home() {
 
   const handleEditChat = async (id, index) => {
     try {
-      await axios.put(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`, {
+      await axios.put(`http://localhost:8000/api/threads/${id}/`, {
         thread_name: tempName,
       });
   
@@ -212,7 +212,7 @@ function Home() {
 
   const handleDeleteAll = () => {
     try {
-      axios.delete('https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/delete-all/')
+      axios.delete('http://localhost:8000/api/threads/delete-all/')
         .then(() => {
           // Once the delete request is successful, fetch new data and update the state
           fetchChats();
@@ -229,7 +229,7 @@ function Home() {
   };
   const handleDeleteChat = async (id) => {
     try {
-      const response = await axios.delete(`https://nalc-backend-ebe218d27802.herokuapp.com/api/threads/${id}/`);
+      const response = await axios.delete(`http://localhost:8000/api/threads/${id}/`);
       fetchChats();     
       setChatMsg([]);
       setShowHome(true);
@@ -285,7 +285,7 @@ function Home() {
   
         if (currentThreadId !== 0) {
           // Send the message
-          await axios.post('https://nalc-backend-ebe218d27802.herokuapp.com/api/messages/create/', {
+          await axios.post('http://localhost:8000/api/messages/create/', {
             thread_id: currentThreadId,
             query: input,
           });
